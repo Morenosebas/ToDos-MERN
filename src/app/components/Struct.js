@@ -8,6 +8,10 @@ export default class BlockStruct extends Component {
         dataBlock: null,
         _id: '',
     }
+    IdChange = () => {
+        console.log('IDCHANGE EJECUTADA')
+        this.setState({ _id: '' })
+    }
     FetchFirst = () => {
         fetch('/api/tasks/')
             .then(response => response.json())
@@ -30,7 +34,9 @@ export default class BlockStruct extends Component {
         console.log('DMOunt Struct')
     }
     componentDidUpdate(prevProps, prevState) {
-    
+        if (prevState._id !== this.state._id) {
+            this.FetchFirst();
+        }
     }
     deleteTask = (id) => {
         if (confirm('¿Desea eliminar esta tarea?')) {
@@ -71,7 +77,7 @@ export default class BlockStruct extends Component {
             return <></>
 
         } else {
-            console.log('data form else', this.state.dataBlock)
+            console.log('data form else render', this.state.dataBlock)
         }
         return (
 
@@ -80,7 +86,7 @@ export default class BlockStruct extends Component {
                     <div className="col s5">
                         <div className="card grey darken-4">
                             <div className="card-content">
-                                <FormTask updateTask={this.state._id} />
+                                <FormTask IdChangeHandler={this.IdChange} updateTask={this.state._id} />
                             </div>
                         </div>
                     </div>
@@ -107,7 +113,7 @@ export default class BlockStruct extends Component {
                                                     </button>
                                                 </td>
                                                 <td>
-                                                    <button on className="btn light-blue darken-4" onClick={() => this.updateTask(task._id)} >
+                                                    <button on className="btn light-blue darken-4" onClick={() => { this.updateTask(task._id) }} >
                                                         <i className="material-icons" >edit</i>
                                                     </button>
                                                 </td>

@@ -89,8 +89,8 @@ export default class FormTask extends Component {
         if (prevProps.updateTask !== this.props.updateTask) {
             console.log('dentro del if', this.props.updateTask);
             this.FetchTask();
+            }
         }
-    }
 
     render() {
 
@@ -106,7 +106,7 @@ export default class FormTask extends Component {
                         <textarea name="description" onChange={this.HandleChange} placeholder="Task description" className="materialize-textarea" style={{ color: 'white' }} value={this.state.description}></textarea>
                     </div>
                 </div>
-                <button className="waves-effect light-blue darken-4 btn-large" onClick={this.props.onClick} type="submit" > Send Task </button>
+                <button className="waves-effect light-blue darken-4 btn-large" onClick={this.props.IdChangeHandler} type="submit" > Send Task </button>
             </form>
 
         );
