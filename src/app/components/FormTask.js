@@ -11,6 +11,7 @@ export default class FormTask extends Component {
     }
     obtenerId = () => {
         this.state._id = this.props.updateTask;
+
         console.log(this.state._id)
     }
     HandleChange = (e) => {
@@ -67,7 +68,7 @@ export default class FormTask extends Component {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    console.log(data.status)
                     let toastHTML = '<span>Task Saved!</span><button class="btn-flat toast-action">Desliza</button>';
                     M.toast({ html: toastHTML })
                     this.setState({ title: '', description: '' });
@@ -89,8 +90,8 @@ export default class FormTask extends Component {
         if (prevProps.updateTask !== this.props.updateTask) {
             console.log('dentro del if', this.props.updateTask);
             this.FetchTask();
-            }
         }
+    }
 
     render() {
 

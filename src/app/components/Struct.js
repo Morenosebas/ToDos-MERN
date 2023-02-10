@@ -7,35 +7,31 @@ export default class BlockStruct extends Component {
     state = {
         dataBlock: null,
         _id: '',
+        status: ''
     }
     IdChange = () => {
         console.log('IDCHANGE EJECUTADA')
-        this.setState({ _id: '' })
+        this.setState({ _id: '' ,status: 'POST'})
+        this.FetchFirst();
+
+
     }
     FetchFirst = () => {
         fetch('/api/tasks/')
             .then(response => response.json())
             .then(data => {
-                this.setState({ dataBlock: data.data })
-                console.log(' data desde fetch', this.state.dataBlock)
-            })
-    }
-    FetchReload = () => {
-        fetch('/api/tasks/')
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ dataBlock: data.data, _id: '' })
-                console.log('data desde reload', this.state.dataBlock)
+                this.setState({ dataBlock: data.data, status:'' })
             })
     }
 
     componentDidMount() {
         this.FetchFirst();
-        console.log('DMOunt Struct')
     }
     componentDidUpdate(prevProps, prevState) {
-        if (prevState._id !== this.state._id) {
+        //probar incrementando la prevState para hacer un cambio
+        if ((prevState._id !== this.state._id) || (this.state.status == 'POST')) {
             this.FetchFirst();
+            console.log('ejecutando el cambio de data')
         }
     }
     deleteTask = (id) => {
