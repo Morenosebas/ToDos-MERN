@@ -11,7 +11,7 @@ export default class BlockStruct extends Component {
     }
     IdChange = () => {
         console.log('IDCHANGE EJECUTADA')
-        this.setState({ _id: '' ,status: 'POST'})
+        this.setState({ _id: '', status: 'POST' })
         this.FetchFirst();
 
 
@@ -20,7 +20,7 @@ export default class BlockStruct extends Component {
         fetch('/api/tasks/')
             .then(response => response.json())
             .then(data => {
-                this.setState({ dataBlock: data.data, status:'' })
+                this.setState({ dataBlock: data.data, status: '' })
             })
     }
 
@@ -90,7 +90,7 @@ export default class BlockStruct extends Component {
                         <div className="table-responsive">
                             <table className="table table-striped table-dark">
                                 <thead>
-                                    <tr>
+                                    <tr key={'thead'}>
                                         <th scope="col">#</th>
                                         <th scope="col">Tarea</th>
                                         <th scope="col">Description</th>
@@ -99,7 +99,7 @@ export default class BlockStruct extends Component {
                                 <tbody >
                                     {
                                         this.state.dataBlock.map((task, index) => (
-                                            <tr key={task._id}>
+                                            <tr key={(task._id)}>
                                                 <td >{index + 1}</td>
                                                 <td >{task.title}</td>
                                                 <td >{task.description}</td>
@@ -109,7 +109,7 @@ export default class BlockStruct extends Component {
                                                     </button>
                                                 </td>
                                                 <td>
-                                                    <button on className="btn light-blue darken-4" onClick={() => { this.updateTask(task._id) }} >
+                                                    <button className="btn light-blue darken-4" onClick={() => { this.updateTask(task._id) }} >
                                                         <i className="material-icons" >edit</i>
                                                     </button>
                                                 </td>
