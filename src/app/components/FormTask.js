@@ -7,15 +7,12 @@ export default class FormTask extends Component {
         title: '',
         description: '',
         _id: '',
-        content: null,
     }
     obtenerId = () => {
         this.state._id = this.props.updateTask;
 
-        console.log(this.state._id)
     }
     HandleChange = (e) => {
-        //pedir name y value e.target.name....
         const { name, value } = e.target;
         this.setState({
             [name]: value,
@@ -26,7 +23,6 @@ export default class FormTask extends Component {
         fetch('/api/tasks/')
             .then(response => response.json())
             .then(data => {
-                this.setState({ content: data.data });
                 this.obtenerId();
             })
 
@@ -34,50 +30,54 @@ export default class FormTask extends Component {
     }
 
     AddTask = (e) => {
-
         e.preventDefault();
-        if (this.state._id) {
-            fetch(`/api/tasks/${this.state._id}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    title: this.state.title,
-                    description: this.state.description,
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => response.json)
-                .then(data => {
-                    let toastHTML = '<span>Task Update!</span><button class="btn-flat toast-action">Desliza</button>';
-                    M.toast({ html: toastHTML })
-                    this.setState({ _id: '', title: '', description: '' });
-                    this.FetchTask();
-                })
-
+        if (this.state.title == '') {
+            alert('Por favor ponga un titulo a la tarea');
         } else {
-
-            fetch('/api/tasks/', {
-                method: 'POST',
-                body: JSON.stringify(this.state),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.status)
-                    let toastHTML = '<span>Task Saved!</span><button class="btn-flat toast-action">Desliza</button>';
-                    M.toast({ html: toastHTML })
-                    this.setState({ title: '', description: '' });
-                    this.FetchTask();
+            if (this.state._id) {
+                fetch(`/api/tasks/${this.state._id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        title: this.state.title,
+                        description: this.state.description,
+                    }),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
                 })
-                .catch(err => console.error(err));
+                    .then(response => response.json)
+                    .then(data => {
+                        let toastHTML = '<span>Task Update!</span><button class="btn-flat toast-action">Desliza</button>';
+                        M.toast({ html: toastHTML })
+                        this.setState({ _id: '', title: '', description: '' });
+                        this.FetchTask();
+                    })
+
+            } else {
+
+                fetch('/api/tasks/', {
+                    method: 'POST',
+                    body: JSON.stringify(this.state),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.status)
+                        let toastHTML = '<span>Task Saved!</span><button class="btn-flat toast-action">Desliza</button>';
+                        M.toast({ html: toastHTML })
+                        this.setState({ title: '', description: '' });
+                        this.FetchTask();
+                    })
+                    .catch(err => console.error(err));
+
+            }
+
 
         }
-
     }
 
 
@@ -88,7 +88,6 @@ export default class FormTask extends Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.updateTask !== this.props.updateTask) {
-            console.log('dentro del if', this.props.updateTask);
             this.FetchTask();
         }
     }

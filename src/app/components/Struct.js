@@ -31,7 +31,6 @@ export default class BlockStruct extends Component {
         //probar incrementando la prevState para hacer un cambio
         if ((prevState._id !== this.state._id) || (this.state.status == 'POST')) {
             this.FetchFirst();
-            console.log('ejecutando el cambio de data')
         }
     }
     deleteTask = (id) => {
@@ -45,7 +44,6 @@ export default class BlockStruct extends Component {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     let toastHTML = '<span>Task Delete!</span><button class="btn-flat toast-action">Desliza</button>';
                     M.toast({ html: toastHTML })
                     this.FetchFirst();
@@ -56,7 +54,6 @@ export default class BlockStruct extends Component {
         fetch(`/api/tasks/${id}`)
             .then(response => response.json())
             .then(data => {
-                console.log('data updateTask', data.task);
                 this.setState({
                     title: data.task.title,
                     description: data.task.description,
