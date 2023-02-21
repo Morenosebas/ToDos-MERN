@@ -11,7 +11,6 @@ export default class App extends Component {
 
         return (
             <div>
-                {/*estas es mi nave */}
                 <Navigator />
                 <BlockStruct />
             </div>
