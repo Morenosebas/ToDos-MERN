@@ -1,0 +1,9 @@
+version: v1
+routes:
+  - src: /.*
+    dest: public
+build:
+  env: production
+  commands:
+    - npm install
+    - npm run build
