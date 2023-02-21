@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "webpack": "webpack --mode development --watch /src/public/index.html",
-    "build": "react-scripts build"
+    "webpack": "webpack --mode development --watch /src/public/index.html"
   },
   "author": "Johang31m",
   "license": "ISC",
