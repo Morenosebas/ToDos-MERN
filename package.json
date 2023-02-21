@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "webpack": "webpack --mode development --watch /src/public/index.html"
+    "webpack": "webpack --mode development --watch"
   },
   "author": "Johang31m",
   "license": "ISC",
@@ -15,7 +15,8 @@
     "materialize-css": "^1.0.0",
     "mongoose": "^6.8.4",
     "morgan": "^1.10.0",
-    "react-scripts": "^5.0.1"
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
